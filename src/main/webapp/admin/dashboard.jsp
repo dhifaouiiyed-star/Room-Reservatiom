@@ -37,7 +37,7 @@
                             <p style="color: #6b7280; margin-bottom: 16px;">
                                 Home page
                             </p>
-                            <a href="${pageContext.request.contextPath}/home/index.jsp" class="btn-primary"
+                            <a href="${pageContext.request.contextPath}/home" class="btn-primary"
                                style="display: inline-block; text-decoration: none;">
                                 Home
                             </a>
