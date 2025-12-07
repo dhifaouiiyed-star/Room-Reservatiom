@@ -29,9 +29,17 @@
                             <p style="color: #6b7280; margin-bottom: 16px;">
                                 Admin features coming soon...
                             </p>
+
                             <a href="${pageContext.request.contextPath}/logout" class="btn-primary"
                                 style="display: inline-block; text-decoration: none;">
                                 Logout
+                            </a>
+                            <p style="color: #6b7280; margin-bottom: 16px;">
+                                Home page
+                            </p>
+                            <a href="${pageContext.request.contextPath}/home" class="btn-primary"
+                               style="display: inline-block; text-decoration: none;">
+                                Home
                             </a>
                         </div>
                     </div>
