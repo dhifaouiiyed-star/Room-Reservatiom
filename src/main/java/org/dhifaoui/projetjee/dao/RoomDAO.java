@@ -4,10 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.dhifaoui.projetjee.Exceptions.NotFoundException;
 import org.dhifaoui.projetjee.entities.Room;
-import org.dhifaoui.projetjee.entities.User;
 import org.dhifaoui.projetjee.util.JPAUtil;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,20 +18,23 @@ public class RoomDAO {
             em.persist(room);
             em.getTransaction().commit();
             return room;
-        }catch (Exception e) {
+        } catch (Exception e) {
             em.getTransaction().rollback();
             throw new RuntimeException("Error saving user");
-        }finally {
+        } finally {
             em.close();
         }
     }
+
     // Find by id
-    public Optional<Room> findById(Long id){
+    public Optional<Room> findById(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         Room room = em.find(Room.class, id);
-        if(room == null) throw new NotFoundException("Room not found");
+        if (room == null)
+            throw new NotFoundException("Room not found");
         return Optional.of(room);
     }
+
     // Update room
     public Room update(Room room) {
         EntityManager em = JPAUtil.getEntityManager();
@@ -52,15 +53,16 @@ public class RoomDAO {
         }
 
     }
+
     // Delete room
-    public void deleteById(Long id){
+    public void deleteById(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             em.getTransaction().begin();
             Room room = em.find(Room.class, id);
             if (room != null) {
                 em.remove(room);
-            }else {
+            } else {
                 throw new NotFoundException("Room not found");
             }
             em.getTransaction().commit();
@@ -74,11 +76,12 @@ public class RoomDAO {
             em.close();
         }
     }
+
     // Get All the Rooms
     public List<Room> findAll() {
         try (EntityManager em = JPAUtil.getEntityManager()) {
             TypedQuery<Room> query = em.createQuery("SELECT r FROM Room r", Room.class);
-            for(Room room : query.getResultList()){
+            for (Room room : query.getResultList()) {
                 System.out.println(room);
             }
             return query.getResultList();
