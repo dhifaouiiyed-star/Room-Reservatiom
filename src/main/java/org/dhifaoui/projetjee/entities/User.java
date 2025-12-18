@@ -5,10 +5,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entity representing a user in the room reservation system.
- * Users can be either administrators or regular users.
- */
 @Entity
 @Table(name = "users")
 public class User {

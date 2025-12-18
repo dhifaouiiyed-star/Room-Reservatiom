@@ -17,10 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-/**
- * Create Reservation Servlet
- * Handles reservation creation with business rule validation
- */
+
 @WebServlet("/user/create-reservation")
 public class CreateReservationServlet extends HttpServlet {
 

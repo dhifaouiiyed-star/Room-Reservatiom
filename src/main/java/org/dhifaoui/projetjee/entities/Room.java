@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Entity representing a room (salle) that can be reserved.
- */
 @Entity
 @Table(name = "rooms")
 public class Room {

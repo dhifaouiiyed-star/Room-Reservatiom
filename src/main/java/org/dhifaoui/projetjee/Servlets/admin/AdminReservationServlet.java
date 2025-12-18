@@ -13,10 +13,7 @@ import org.dhifaoui.projetjee.service.ReservationService;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Admin Reservation Servlet
- * Allows admins to view all reservations and cancel them
- */
+
 @WebServlet("/admin/reservations")
 public class AdminReservationServlet extends HttpServlet {
 

@@ -13,10 +13,7 @@ import org.dhifaoui.projetjee.service.RoomService;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Admin Room Management Servlet
- * Allows admins to create, edit, delete, and manage rooms
- */
+
 @WebServlet("/admin/rooms")
 public class AdminRoomManagementServlet extends HttpServlet {
 

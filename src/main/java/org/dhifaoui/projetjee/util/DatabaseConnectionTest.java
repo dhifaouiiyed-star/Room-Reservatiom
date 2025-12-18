@@ -6,10 +6,7 @@ import org.dhifaoui.projetjee.entities.*;
 
 import java.time.LocalDateTime;
 
-/**
- * Test class to verify database connection and entity setup.
- * This class creates sample data to test the JPA configuration.
- */
+
 public class DatabaseConnectionTest {
 
     public static void main(String[] args) {

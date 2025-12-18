@@ -8,10 +8,7 @@ import org.dhifaoui.projetjee.entities.UserRole;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service layer for User management (Admin operations).
- * Handles user CRUD operations and role management.
- */
+
 public class UserManagementService {
 
     private final UserDAO userDAO;
@@ -22,23 +19,23 @@ public class UserManagementService {
         this.reservationDAO = new ReservationDAO();
     }
 
-    /**
-     * Get all users
-     */
+      
+     // Get all users
+       
     public List<User> getAllUsers() {
         return userDAO.findAll();
     }
 
-    /**
-     * Get a user by ID
-     */
+      
+     // Get a user by ID
+       
     public Optional<User> getUserById(Long id) {
         return userDAO.findById(id);
     }
 
-    /**
-     * Promote a user to admin role
-     */
+      
+     // Promote a user to admin role
+       
     public User promoteToAdmin(Long userId) {
         Optional<User> userOpt = userDAO.findById(userId);
 
@@ -51,9 +48,9 @@ public class UserManagementService {
         return userDAO.update(user);
     }
 
-    /**
-     * Demote an admin to regular user role
-     */
+      
+     // Demote an admin to regular user role
+       
     public User demoteToUser(Long userId) {
         Optional<User> userOpt = userDAO.findById(userId);
 
@@ -66,9 +63,9 @@ public class UserManagementService {
         return userDAO.update(user);
     }
 
-    /**
-     * Toggle user role between ADMIN and USER
-     */
+      
+     // Toggle user role between ADMIN and USER
+       
     public User toggleUserRole(Long userId) {
         Optional<User> userOpt = userDAO.findById(userId);
 
@@ -85,9 +82,9 @@ public class UserManagementService {
         return userDAO.update(user);
     }
 
-    /**
-     * Delete a user (cascades to their reservations)
-     */
+      
+     // Delete a user (cascades to their reservations)
+       
     public void deleteUser(Long userId) {
         Optional<User> userOpt = userDAO.findById(userId);
 
@@ -98,9 +95,9 @@ public class UserManagementService {
         userDAO.delete(userId);
     }
 
-    /**
-     * Get user statistics (reservation count, etc.)
-     */
+      
+     // Get user statistics (reservation count, etc.)
+       
     public UserStatistics getUserStatistics(Long userId) {
         Optional<User> userOpt = userDAO.findById(userId);
 
@@ -114,16 +111,16 @@ public class UserManagementService {
         return new UserStatistics(userId, totalReservations, activeReservations);
     }
 
-    /**
-     * Get total user count
-     */
+      
+     // Get total user count
+       
     public long getTotalUserCount() {
         return userDAO.findAll().size();
     }
 
-    /**
-     * Inner class for user statistics
-     */
+      
+     // Inner class for user statistics
+       
     public static class UserStatistics {
         private final Long userId;
         private final long totalReservations;

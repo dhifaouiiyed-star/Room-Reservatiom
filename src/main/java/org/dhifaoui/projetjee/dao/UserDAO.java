@@ -9,15 +9,10 @@ import org.dhifaoui.projetjee.util.JPAUtil;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data Access Object for User entity.
- * Provides CRUD operations and authentication-related queries.
- */
+
 public class UserDAO {
 
-    /**
-     * Save a new user to the database
-     */
+    // Create User
     public User save(User user) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -35,9 +30,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Find a user by ID
-     */
+    // Get User by id
     public Optional<User> findById(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -48,9 +41,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Find a user by username
-     */
+    // Get User by name
     public Optional<User> findByUsername(String username) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -65,9 +56,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Find a user by email
-     */
+    // Get User by email
     public Optional<User> findByEmail(String email) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -82,9 +71,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Update an existing user
-     */
+    // Update User
     public User update(User user) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -102,9 +89,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Delete a user by ID
-     */
+    // Delete User
     public void delete(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -124,9 +109,7 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Find all users
-     */
+    // Get All Users
     public List<User> findAll() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -137,16 +120,15 @@ public class UserDAO {
         }
     }
 
-    /**
-     * Check if a username already exists
-     */
+
+     // Check if a username already exists
+
     public boolean existsByUsername(String username) {
         return findByUsername(username).isPresent();
     }
+    
+     // Check if an email already exists
 
-    /**
-     * Check if an email already exists
-     */
     public boolean existsByEmail(String email) {
         return findByEmail(email).isPresent();
     }

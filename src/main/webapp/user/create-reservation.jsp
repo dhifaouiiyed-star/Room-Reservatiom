@@ -7,8 +7,8 @@
                         response.sendRedirect(request.getContextPath() + "/login" ); return; } Room room=(Room)
                         request.getAttribute("room"); if (room==null) { response.sendRedirect(request.getContextPath()
                         + "/user/rooms" ); return; } String error=(String) session.getAttribute("error"); if (error
-                        !=null) session.removeAttribute("error"); // Generate default dates (now + 1 hour and now + 2
-                        hours) LocalDateTime now=LocalDateTime.now(); LocalDateTime
+                        !=null) session.removeAttribute("error"); // Generate default dates (now + 1 hour and now + 2 hours)
+                        LocalDateTime now=LocalDateTime.now(); LocalDateTime
                         defaultStart=now.plusHours(1).withMinute(0).withSecond(0).withNano(0); LocalDateTime
                         defaultEnd=defaultStart.plusHours(1); DateTimeFormatter
                         htmlFormatter=DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm"); %>

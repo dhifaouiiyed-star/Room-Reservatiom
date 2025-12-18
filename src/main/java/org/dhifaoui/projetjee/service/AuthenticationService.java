@@ -7,9 +7,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.Optional;
 
-/**
- * Service class for handling authentication and user management.
- */
+
 public class AuthenticationService {
 
     private final UserDAO userDAO;
@@ -18,16 +16,7 @@ public class AuthenticationService {
         this.userDAO = new UserDAO();
     }
 
-    /**
-     * Register a new user
-     * 
-     * @param username User's username
-     * @param email    User's email
-     * @param password Plain text password (will be hashed)
-     * @param role     User's role
-     * @return The created user
-     * @throws IllegalArgumentException if validation fails
-     */
+
     public User register(String username, String email, String password, UserRole role) {
         // Validation
         if (username == null || username.trim().isEmpty()) {
@@ -58,13 +47,7 @@ public class AuthenticationService {
         return userDAO.save(user);
     }
 
-    /**
-     * Authenticate a user with username and password
-     * 
-     * @param username Username
-     * @param password Plain text password
-     * @return Optional containing the user if authentication succeeds
-     */
+
     public Optional<User> authenticate(String username, String password) {
         if (username == null || password == null) {
             return Optional.empty();
@@ -82,23 +65,12 @@ public class AuthenticationService {
         return Optional.empty();
     }
 
-    /**
-     * Hash a password using BCrypt
-     * 
-     * @param password Plain text password
-     * @return Hashed password
-     */
+
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt(12));
     }
 
-    /**
-     * Verify a password against a hashed password
-     * 
-     * @param rawPassword    Plain text password
-     * @param hashedPassword Hashed password from database
-     * @return true if password matches
-     */
+
     public boolean verifyPassword(String rawPassword, String hashedPassword) {
         try {
             return BCrypt.checkpw(rawPassword, hashedPassword);
@@ -107,24 +79,17 @@ public class AuthenticationService {
         }
     }
 
-    /**
-     * Basic email format validation
-     */
+
     private boolean isValidEmail(String email) {
         String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$";
         return email.matches(emailRegex);
     }
 
-    /**
-     * Find user by ID
-     */
+
     public Optional<User> findById(Long id) {
         return userDAO.findById(id);
     }
 
-    /**
-     * Find user by username
-     */
     public Optional<User> findByUsername(String username) {
         return userDAO.findByUsername(username);
     }

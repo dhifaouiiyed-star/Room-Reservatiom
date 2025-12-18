@@ -13,10 +13,7 @@ import org.dhifaoui.projetjee.service.UserManagementService;
 
 import java.io.IOException;
 
-/**
- * Admin Dashboard Servlet
- * Displays overview statistics and recent activity for administrators
- */
+
 @WebServlet("/admin/dashboard")
 public class AdminDashboardServlet extends HttpServlet {
 

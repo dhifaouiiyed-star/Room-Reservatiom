@@ -11,10 +11,7 @@ import org.dhifaoui.projetjee.service.ReservationService;
 
 import java.io.IOException;
 
-/**
- * Cancel Reservation Servlet
- * Allows users to cancel their own reservations
- */
+
 @WebServlet("/user/cancel-reservation")
 public class CancelReservationServlet extends HttpServlet {
 
