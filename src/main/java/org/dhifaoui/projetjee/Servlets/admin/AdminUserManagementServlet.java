@@ -12,10 +12,7 @@ import org.dhifaoui.projetjee.service.UserManagementService;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * Admin User Management Servlet
- * Allows admins to view, edit, and delete users
- */
+
 @WebServlet("/admin/users")
 public class AdminUserManagementServlet extends HttpServlet {
 

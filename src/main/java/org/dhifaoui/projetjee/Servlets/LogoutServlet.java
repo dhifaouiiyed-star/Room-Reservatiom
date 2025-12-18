@@ -9,9 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-/**
- * Servlet for handling user logout
- */
+
 public class LogoutServlet extends HttpServlet {
 
     @Override
@@ -26,9 +24,7 @@ public class LogoutServlet extends HttpServlet {
         processLogout(request, response);
     }
 
-    /**
-     * Process logout by invalidating session
-     */
+
     private void processLogout(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         HttpSession session = request.getSession(false);

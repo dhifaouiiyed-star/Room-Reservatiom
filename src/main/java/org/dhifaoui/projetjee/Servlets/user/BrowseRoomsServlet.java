@@ -13,10 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Browse Rooms Servlet
- * Displays available rooms for users to browse and book
- */
+
 @WebServlet("/user/rooms")
 public class BrowseRoomsServlet extends HttpServlet {
 

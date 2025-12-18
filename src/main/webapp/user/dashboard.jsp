@@ -23,8 +23,7 @@
                                             if (success != null) session.removeAttribute("success");
                                             if (error != null) session.removeAttribute("error");
 
-                                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy
-                                            HH:mm");
+                                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm");
                                             %>
                                             <!DOCTYPE html>
                                             <html lang="en">
@@ -135,9 +134,7 @@
                                                                                                     </p>
                                                                                                 </div>
                                                                                                 <span
-                                                                                                    class="status-badge status-<%= reservation.isActive() ? "
-                                                                                                    active"
-                                                                                                    : "cancelled" %>">
+                                                                                                    class="status-badge status-<%= reservation.isActive() ? "active" : "cancelled" %>">
                                                                                                     <%= reservation.getStatus()
                                                                                                         %>
                                                                                                 </span>
@@ -243,9 +240,7 @@
                                                                                                 </p>
                                                                                             </div>
                                                                                             <span
-                                                                                                class="status-badge status-<%= reservation.isActive() ? "
-                                                                                                active" : "cancelled"
-                                                                                                %>">
+                                                                                                class="status-badge status-<%= reservation.isActive() ? "active" : "cancelled" %>">
                                                                                                 <%= reservation.getStatus()
                                                                                                     %>
                                                                                             </span>

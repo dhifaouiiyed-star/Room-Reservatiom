@@ -10,9 +10,7 @@ import org.dhifaoui.projetjee.service.AuthenticationService;
 
 import java.io.IOException;
 
-/**
- * Servlet for handling user registration
- */
+
 public class SignupServlet extends HttpServlet {
 
     private AuthenticationService authService;
@@ -101,9 +99,6 @@ public class SignupServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Preserve form data to redisplay in case of errors
-     */
     private void preserveFormData(HttpServletRequest request, String username, String email) {
         request.setAttribute("username", username);
         request.setAttribute("email", email);

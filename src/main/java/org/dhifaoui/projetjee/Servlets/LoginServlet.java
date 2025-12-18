@@ -12,9 +12,7 @@ import org.dhifaoui.projetjee.service.AuthenticationService;
 import java.io.IOException;
 import java.util.Optional;
 
-/**
- * Servlet for handling user login
- */
+
 public class LoginServlet extends HttpServlet {
 
     private AuthenticationService authService;
@@ -78,9 +76,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    /**
-     * Redirect user based on their role
-     */
+
     private void redirectBasedOnRole(HttpServletResponse response, User user) throws IOException {
         if (user.isAdmin()) {
             response.sendRedirect(getServletContext().getContextPath() + "/admin/dashboard.jsp");

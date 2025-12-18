@@ -3,10 +3,7 @@ package org.dhifaoui.projetjee.entities;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-/**
- * Entity representing a room reservation.
- * Contains business rules validation for time slots and user constraints.
- */
+
 @Entity
 @Table(name = "reservations")
 public class Reservation {
@@ -110,16 +107,16 @@ public class Reservation {
 
     // Business logic methods
 
-    /**
-     * Validates if the end time is after the start time
-     */
+
+     // Validates if the end time is after the start time
+
     public boolean isValidTimeSlot() {
         return endDateTime != null && startDateTime != null && endDateTime.isAfter(startDateTime);
     }
 
-    /**
-     * Checks if this reservation overlaps with another reservation
-     */
+
+     // Checks if this reservation overlaps with another reservation
+
     public boolean overlapsWith(Reservation other) {
         if (other == null || !this.room.getId().equals(other.getRoom().getId())) {
             return false;
@@ -129,23 +126,23 @@ public class Reservation {
                 this.endDateTime.isAfter(other.getStartDateTime());
     }
 
-    /**
-     * Checks if the reservation is in the past
-     */
+
+     // Checks if the reservation is in the past
+
     public boolean isPast() {
         return endDateTime.isBefore(LocalDateTime.now());
     }
 
-    /**
-     * Cancels the reservation
-     */
+
+     // Cancels the reservation
+
     public void cancel() {
         this.status = ReservationStatus.CANCELLED;
     }
 
-    /**
-     * Checks if the reservation is active
-     */
+
+     // Checks if the reservation is active
+
     public boolean isActive() {
         return this.status == ReservationStatus.ACTIVE;
     }

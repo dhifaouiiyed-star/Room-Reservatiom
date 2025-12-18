@@ -11,10 +11,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Service layer for Reservation business logic.
- * Handles business rule validation and reservation operations.
- */
+
 public class ReservationService {
 
     private final ReservationDAO reservationDAO;
@@ -27,51 +24,47 @@ public class ReservationService {
         this.roomDAO = new RoomDAO();
     }
 
-    /**
-     * Business Rule: Validate that the room is not already booked for the given
-     * time slot
-     */
+
+     // Validate that the room is not already booked for the given time slot
+
     public boolean validateNoDoubleBooking(Long roomId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         List<Reservation> conflicts = reservationDAO.findConflictingReservations(roomId, startDateTime, endDateTime);
         return conflicts.isEmpty();
     }
 
-    /**
-     * Business Rule: Validate that the user doesn't have another active reservation
-     * in the same time slot
-     */
+
+     // Validate that the user doesn't have another active reservation in the same time slot
+
     public boolean validateUserAvailability(Long userId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         List<Reservation> userConflicts = reservationDAO.findUserReservationInTimeSlot(userId, startDateTime,
                 endDateTime);
         return userConflicts.isEmpty();
     }
 
-    /**
-     * Business Rule: Validate that the reservation is not in the past
-     */
+
+     // Validate that the reservation is not in the past
+
     public boolean validateNotPast(LocalDateTime startDateTime) {
         return startDateTime.isAfter(LocalDateTime.now());
     }
 
-    /**
-     * Business Rule: Validate that end time is after start time
-     */
+
+     // Validate that end time is after start time
+
     public boolean validateTimeRange(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         return endDateTime.isAfter(startDateTime);
     }
 
-    /**
-     * Business Rule: Check if a reservation can be modified (not in the past)
-     */
+
+     // Check if a reservation can be modified (not in the past)
+
     public boolean canModifyReservation(Reservation reservation) {
         return !reservation.isPast();
     }
 
-    /**
-     * Create a reservation with full business rule validation
-     * 
-     * @throws IllegalArgumentException if any business rule is violated
-     */
+
+     // Create a reservation
+
     public Reservation createReservation(Long userId, Long roomId, LocalDateTime startDateTime,
             LocalDateTime endDateTime) {
         // Validate time range
@@ -115,11 +108,9 @@ public class ReservationService {
         return reservationDAO.save(reservation);
     }
 
-    /**
-     * Cancel a user's own reservation
-     * 
-     * @throws IllegalArgumentException if validation fails
-     */
+
+     // Cancel a user's own reservation
+
     public void cancelReservation(Long reservationId, Long userId) {
         Optional<Reservation> reservationOpt = reservationDAO.findById(reservationId);
 
@@ -149,11 +140,9 @@ public class ReservationService {
         reservationDAO.update(reservation);
     }
 
-    /**
-     * Admin cancel any reservation
-     * 
-     * @throws IllegalArgumentException if validation fails
-     */
+
+     // Admin cancel any reservation
+
     public void adminCancelReservation(Long reservationId) {
         Optional<Reservation> reservationOpt = reservationDAO.findById(reservationId);
 
@@ -173,72 +162,71 @@ public class ReservationService {
         reservationDAO.update(reservation);
     }
 
-    /**
-     * Get all reservations for a specific user
-     */
+
+     // Get all reservations for a specific user
+
     public List<Reservation> getUserReservations(Long userId) {
         return reservationDAO.findByUserId(userId);
     }
 
-    /**
-     * Get active reservations for a specific user
-     */
+
+     // Get active reservations for a specific user
+
     public List<Reservation> getUserActiveReservations(Long userId) {
         return reservationDAO.findActiveByUserId(userId);
     }
 
-    /**
-     * Get upcoming reservations for a specific user
-     */
+
+     // Get upcoming reservations for a specific user
+
     public List<Reservation> getUserUpcomingReservations(Long userId) {
         return reservationDAO.findUpcomingByUserId(userId);
     }
 
-    /**
-     * Get past reservations for a specific user
-     */
+
+    //  Get past reservations for a specific user
+
     public List<Reservation> getUserPastReservations(Long userId) {
         return reservationDAO.findPastByUserId(userId);
     }
 
-    /**
-     * Get all reservations (admin only)
-     */
+
+     // Get all reservations (admin only)
+
     public List<Reservation> getAllReservations() {
         return reservationDAO.findAll();
     }
 
-    /**
-     * Get all upcoming reservations (admin)
-     */
+
+     // Get all upcoming reservations (admin)
+
     public List<Reservation> getUpcomingReservations() {
         return reservationDAO.findUpcomingReservations();
     }
 
-    /**
-     * Get reservations for a specific room
-     */
+
+     // Get reservations for a specific room
+
     public List<Reservation> getRoomReservations(Long roomId) {
         return reservationDAO.findByRoomId(roomId);
     }
 
-    /**
-     * Get a reservation by ID
-     */
+     // Get a reservation by ID
+
     public Optional<Reservation> getReservationById(Long id) {
         return reservationDAO.findById(id);
     }
 
-    /**
-     * Get reservation statistics
-     */
+
+    //  Get reservation statistics
+
     public long getTotalActiveReservations() {
         return reservationDAO.countActiveReservations();
     }
 
-    /**
-     * Get user's reservation count
-     */
+
+     // Get user's reservation count
+
     public long getUserReservationCount(Long userId) {
         return reservationDAO.countByUserId(userId);
     }

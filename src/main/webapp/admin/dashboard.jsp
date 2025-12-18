@@ -4,8 +4,8 @@
             <%@ page import="java.util.List" %>
                 <%@ page import="java.time.format.DateTimeFormatter" %>
                     <% User user=(User) session.getAttribute("user"); if (user==null || !user.isAdmin()) {
-                        response.sendRedirect(request.getContextPath() + "/login" ); return; } // Handle null attributes
-                        with defaults Long totalUsersObj=(Long) request.getAttribute("totalUsers"); Long
+                        response.sendRedirect(request.getContextPath() + "/login" ); return; } // Handle null attributes with defaults
+                        Long totalUsersObj=(Long) request.getAttribute("totalUsers"); Long
                         totalRoomsObj=(Long) request.getAttribute("totalRooms"); Long activeReservationsObj=(Long)
                         request.getAttribute("activeReservations"); List<Reservation> upcomingReservations = (List
                         <Reservation>) request.getAttribute("upcomingReservations");
@@ -157,8 +157,7 @@
                                                                                         </td>
                                                                                         <td>
                                                                                             <span
-                                                                                                class="badge badge-<%= reservation.isActive() ? "
-                                                                                                success" : "danger" %>">
+                                                                                                class="badge badge-<%= reservation.isActive() ? "success" : "danger" %>">
                                                                                                 <%= reservation.getStatus()
                                                                                                     %>
                                                                                             </span>

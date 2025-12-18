@@ -13,10 +13,7 @@ import org.dhifaoui.projetjee.service.ReservationService;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * User Dashboard Servlet
- * Displays user's reservations and quick stats
- */
+
 @WebServlet("/user/dashboard")
 public class UserDashboardServlet extends HttpServlet {
 

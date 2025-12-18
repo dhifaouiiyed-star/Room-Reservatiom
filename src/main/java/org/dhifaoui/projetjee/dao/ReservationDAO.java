@@ -12,16 +12,11 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Data Access Object for Reservation entity.
- * Provides CRUD operations and business-specific queries for reservation
- * management.
- */
 public class ReservationDAO {
 
-    /**
-     * Save a new reservation to the database
-     */
+
+    //Save a new reservation to the database
+
     public Reservation save(Reservation reservation) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -39,9 +34,9 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find a reservation by ID
-     */
+
+    // Find a reservation by ID
+
     public Optional<Reservation> findById(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -52,9 +47,9 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Update an existing reservation
-     */
+
+    //  Update an existing reservation
+
     public Reservation update(Reservation reservation) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -72,9 +67,9 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Delete a reservation by ID
-     */
+
+    // Delete a reservation by ID
+
     public void delete(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -94,28 +89,35 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find all reservations
-     */
+
+     // Find all reservations
+
     public List<Reservation> findAll() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r ORDER BY r.startDateTime DESC", Reservation.class);
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "ORDER BY r.startDateTime DESC",
+                    Reservation.class);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
 
-    /**
-     * Find all reservations for a specific user
-     */
+
+     // Find all reservations for a specific user
+
     public List<Reservation> findByUser(User user) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user = :user ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user = :user ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("user", user);
             return query.getResultList();
@@ -124,14 +126,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find all reservations for a specific user by user ID
-     */
+
+     // Find all reservations for a specific user by user ID
+
     public List<Reservation> findByUserId(Long userId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user.id = :userId ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user.id = :userId ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("userId", userId);
             return query.getResultList();
@@ -140,14 +145,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find all reservations for a specific room
-     */
+
+     // Find all reservations for a specific room
+
     public List<Reservation> findByRoom(Room room) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.room = :room ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.room = :room ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("room", room);
             return query.getResultList();
@@ -156,14 +164,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find all reservations for a specific room by room ID
-     */
+
+     // Find all reservations for a specific room by room ID
+
     public List<Reservation> findByRoomId(Long roomId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.room.id = :roomId ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.room.id = :roomId ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("roomId", roomId);
             return query.getResultList();
@@ -172,14 +183,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find active reservations for a specific user
-     */
+
+     // Find active reservations for a specific user
+
     public List<Reservation> findActiveByUser(User user) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user = :user AND r.status = :status ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user = :user AND r.status = :status ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("user", user);
             query.setParameter("status", ReservationStatus.ACTIVE);
@@ -189,14 +203,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find active reservations for a specific user by user ID
-     */
+
+    //  Find active reservations for a specific user by user ID
+
     public List<Reservation> findActiveByUserId(Long userId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user.id = :userId AND r.status = :status ORDER BY r.startDateTime DESC",
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user.id = :userId AND r.status = :status ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("userId", userId);
             query.setParameter("status", ReservationStatus.ACTIVE);
@@ -206,11 +223,7 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find conflicting reservations for a room within a time range.
-     * Used to check for double booking - returns active reservations that overlap
-     * with the given time range.
-     */
+    // Check for double booking within a time
     public List<Reservation> findConflictingReservations(Long roomId, LocalDateTime startDateTime,
             LocalDateTime endDateTime) {
         EntityManager em = JPAUtil.getEntityManager();
@@ -231,10 +244,7 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find user's reservations within a specific time range.
-     * Used to check if user already has a booking during this time.
-     */
+    // Find user reservation by time
     public List<Reservation> findUserReservationInTimeSlot(Long userId, LocalDateTime startDateTime,
             LocalDateTime endDateTime) {
         EntityManager em = JPAUtil.getEntityManager();
@@ -255,14 +265,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find upcoming reservations (future reservations only)
-     */
+
+     // Find upcoming reservations (future reservations only)
+
     public List<Reservation> findUpcomingReservations() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.status = :status " +
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.status = :status " +
                             "AND r.startDateTime > :now ORDER BY r.startDateTime ASC",
                     Reservation.class);
             query.setParameter("status", ReservationStatus.ACTIVE);
@@ -273,14 +286,17 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find upcoming reservations for a specific user
-     */
+
+     // Find upcoming reservations for a specific user
+
     public List<Reservation> findUpcomingByUserId(Long userId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user.id = :userId " +
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user.id = :userId " +
                             "AND r.status = :status " +
                             "AND r.startDateTime > :now ORDER BY r.startDateTime ASC",
                     Reservation.class);
@@ -293,14 +309,16 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Find past reservations for a specific user
-     */
+     // Find past reservations for a specific user
+
     public List<Reservation> findPastByUserId(Long userId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
             TypedQuery<Reservation> query = em.createQuery(
-                    "SELECT r FROM Reservation r WHERE r.user.id = :userId " +
+                    "SELECT r FROM Reservation r " +
+                            "JOIN FETCH r.user " +
+                            "JOIN FETCH r.room " +
+                            "WHERE r.user.id = :userId " +
                             "AND r.endDateTime < :now ORDER BY r.startDateTime DESC",
                     Reservation.class);
             query.setParameter("userId", userId);
@@ -311,9 +329,8 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Count total active reservations
-     */
+     // Count total active reservations
+
     public long countActiveReservations() {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -326,9 +343,9 @@ public class ReservationDAO {
         }
     }
 
-    /**
-     * Count reservations for a specific user
-     */
+
+     // Count reservations for a specific user
+
     public long countByUserId(Long userId) {
         EntityManager em = JPAUtil.getEntityManager();
         try {

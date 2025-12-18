@@ -10,10 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-/**
- * Service layer for Room business logic.
- * Handles room management operations and availability checks.
- */
+
 public class RoomService {
 
     private final RoomDAO roomDAO;
@@ -24,23 +21,23 @@ public class RoomService {
         this.reservationDAO = new ReservationDAO();
     }
 
-    /**
-     * Get all rooms
-     */
+     
+     // Get all rooms
+      
     public List<Room> getAllRooms() {
         return roomDAO.findAll();
     }
 
-    /**
-     * Get a room by ID
-     */
+     
+     // Get a room by ID
+      
     public Optional<Room> getRoomById(Long id) {
         return roomDAO.findById(id);
     }
 
-    /**
-     * Get available rooms for a specific time slot
-     */
+     
+     // Get available rooms for a specific time slot
+      
     public List<Room> getAvailableRooms(LocalDateTime startDateTime, LocalDateTime endDateTime) {
         List<Room> allRooms = roomDAO.findAll();
 
@@ -55,9 +52,9 @@ public class RoomService {
                 .collect(Collectors.toList());
     }
 
-    /**
-     * Create a new room with validation
-     */
+     
+     // Create a new room with validation
+      
     public Room createRoom(String name, Integer capacity, String description) {
         // Validate inputs
         if (name == null || name.trim().isEmpty()) {
@@ -72,9 +69,9 @@ public class RoomService {
         return roomDAO.save(room);
     }
 
-    /**
-     * Update an existing room
-     */
+     
+     // Update an existing room
+      
     public Room updateRoom(Long id, String name, Integer capacity, String description, Boolean isAvailable) {
         Optional<Room> roomOpt = roomDAO.findById(id);
 
@@ -101,9 +98,9 @@ public class RoomService {
         return roomDAO.update(room);
     }
 
-    /**
-     * Delete a room (cascades to reservations)
-     */
+     
+     // Delete a room (cascades to reservations)
+      
     public void deleteRoom(Long id) {
         Optional<Room> roomOpt = roomDAO.findById(id);
 
@@ -114,9 +111,9 @@ public class RoomService {
         roomDAO.deleteById(id);
     }
 
-    /**
-     * Toggle room availability
-     */
+     
+     // Toggle room availability
+      
     public Room toggleRoomAvailability(Long id) {
         Optional<Room> roomOpt = roomDAO.findById(id);
 
@@ -129,9 +126,9 @@ public class RoomService {
         return roomDAO.update(room);
     }
 
-    /**
-     * Check if room is available for a specific time slot
-     */
+     
+     // Check if room is available for a specific time slot
+      
     public boolean isRoomAvailable(Long roomId, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         Optional<Room> roomOpt = roomDAO.findById(roomId);
 
@@ -144,16 +141,16 @@ public class RoomService {
         return conflicts.isEmpty();
     }
 
-    /**
-     * Get room with its reservations
-     */
+     
+     // Get room with its reservations
+      
     public Optional<Room> getRoomWithReservations(Long id) {
         return roomDAO.findById(id);
     }
 
-    /**
-     * Get total room count
-     */
+     
+     // Get total room count
+      
     public long getTotalRoomCount() {
         return roomDAO.findAll().size();
     }

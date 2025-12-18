@@ -86,14 +86,11 @@
                                                             <h2>Filter Reservations</h2>
                                                             <div class="btn-group">
                                                                 <a href="${pageContext.request.contextPath}/admin/reservations"
-                                                                    class="btn btn-sm <%= currentFilter == null ? "
-                                                                    btn-primary" : "btn-secondary" %>">
+                                                                    class="btn btn-sm <%= currentFilter == null ? "btn-primary" : "btn-secondary" %>">
                                                                     All Reservations
                                                                 </a>
                                                                 <a href="${pageContext.request.contextPath}/admin/reservations?filter=upcoming"
-                                                                    class="btn btn-sm <%= "
-                                                                    upcoming".equals(currentFilter) ? "btn-primary"
-                                                                    : "btn-secondary" %>">
+                                                                    class="btn btn-sm <%= "upcoming".equals(currentFilter) ? "btn-primary": "btn-secondary" %>">
                                                                     Upcoming Only
                                                                 </a>
                                                             </div>
